@@ -48,4 +48,11 @@ Type “t” to change partition type
 Type “53”
 Type “w” to write partitions to the SD-card
 
-
+== Cloning between the original and a new SD card:
+Assuming `sda` is the original and `sdb` is the new one which is slightly larger than the original.
+```
+dd if=/dev/sda of=card.img
+dd if=card.img of=/dev/sdb
+dd if=card.img of=last_512k.img bs=1 skip=$(( $(stat -c%s card.img) - 524288 )) count=524288 status=progress
+dd if=last_512k.img of=/dev/sdb bs=1 seek=$(( $(blockdev --getsize64 /dev/sdb) - 524288 )) conv=notrunc status=progress
+```
