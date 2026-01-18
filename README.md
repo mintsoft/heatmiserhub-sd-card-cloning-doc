@@ -48,7 +48,8 @@ Type “t” to change partition type
 Type “53”
 Type “w” to write partitions to the SD-card
 
-== Cloning between the original and a new SD card:
+Cloning
+=======
 Assuming `sda` is the original and `sdb` is the new one which is slightly larger than the original.
 ```
 dd if=/dev/sda of=card.img
